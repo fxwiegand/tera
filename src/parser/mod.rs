@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 use lazy_static::lazy_static;
-use pest::iterators::Pair;
+use pest::iterators::{Pair, Pairs};
 use pest::pratt_parser::{Assoc, Op, PrattParser};
 use pest::Parser;
 use pest_derive::Parser;
@@ -1045,7 +1045,7 @@ fn parse_if(pair: Pair<Rule>) -> TeraResult<Node> {
 }
 
 fn parse_content(pair: Pair<Rule>) -> TeraResult<Vec<Node>> {
-    let pairs = pair.into_inner();
+    let pairs: Pairs<Rule> = pair.into_inner();
     let mut nodes = Vec::with_capacity(pairs.len());
 
     for p in pairs {
